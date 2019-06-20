@@ -43,6 +43,12 @@ public interface WriteJsonOptions extends PipelineOptions {
     void setWindowDuration(ValueProvider<String> windowDuration);
 
     @Validation.Required
+    @Description("Window the messages lateness into time intervals")
+    ValueProvider<String> getLateDuration();
+
+    void setLateDuration(ValueProvider<String> lateDuration);
+
+    @Validation.Required
     @Description("Number of shards files")
     ValueProvider<Integer> getNumShards();
 

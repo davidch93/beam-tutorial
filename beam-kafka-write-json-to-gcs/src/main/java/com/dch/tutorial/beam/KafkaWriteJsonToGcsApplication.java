@@ -1,7 +1,8 @@
 package com.dch.tutorial.beam;
 
 import com.dch.tutorial.beam.option.WriteJsonOptions;
-import com.dch.tutorial.beam.transform.FilterTombStoneRecord;
+import com.dch.tutorial.beam.transform.KafkaRecordTransformer;
+import com.dch.tutorial.beam.transform.TombStoneRecordFilter;
 import com.dch.tutorial.beam.util.TimeUtil;
 import com.google.common.collect.ImmutableMap;
 import org.apache.beam.sdk.Pipeline;
@@ -35,15 +36,16 @@ public class KafkaWriteJsonToGcsApplication {
                                 .withValueDeserializer(StringDeserializer.class)
                                 .updateConsumerProperties(ImmutableMap.of("group.id", options.getGroupId().get(),
                                         "auto.offset.reset", options.getAutoOffsetReset().get()))
+                                .withLogAppendTime()
                                 .withReadCommitted()
                                 .commitOffsetsInFinalize()
                                 .withoutMetadata())
                 .apply("Collect Value from Kafka", Values.create())
                 .apply(options.getWindowDuration().get() + " Window",
-                        Window.into(FixedWindows.of(TimeUtil.parseDuration(options.getWindowDuration().get()))))
-                .apply("Filter is not Tombstone Flag Record",
-                        Filter.by(new FilterTombStoneRecord()))
-//                    .apply("Transform Record", null)
+                        Window.<String>into(FixedWindows.of(TimeUtil.parseDuration(options.getWindowDuration().get())))
+                                .withAllowedLateness(TimeUtil.parseDuration(options.getLateDuration().get())))
+                .apply("Filter is not Tombstone Flag Record", Filter.by(TombStoneRecordFilter.filter()))
+                .apply("Transform Record", KafkaRecordTransformer.transform())
                 .apply("Write File(s) to GCS",
                         TextIO.write()
                                 .withWindowedWrites()

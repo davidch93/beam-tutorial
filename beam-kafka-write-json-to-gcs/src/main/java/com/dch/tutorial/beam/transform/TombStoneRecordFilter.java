@@ -16,7 +16,14 @@ import org.apache.beam.sdk.transforms.SerializableFunction;
  *
  * @author david.christianto
  */
-public class FilterTombStoneRecord implements SerializableFunction<String, Boolean> {
+public class TombStoneRecordFilter implements SerializableFunction<String, Boolean> {
+
+    private TombStoneRecordFilter() {
+    }
+
+    public static TombStoneRecordFilter filter() {
+        return new TombStoneRecordFilter();
+    }
 
     @Override
     public Boolean apply(String input) {
