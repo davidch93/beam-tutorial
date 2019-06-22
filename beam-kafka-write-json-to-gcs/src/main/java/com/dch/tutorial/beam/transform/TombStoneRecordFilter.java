@@ -21,6 +21,11 @@ public class TombStoneRecordFilter implements SerializableFunction<String, Boole
     private TombStoneRecordFilter() {
     }
 
+    /**
+     * A convenience way to construct {@link TombStoneRecordFilter}.
+     *
+     * @return {@link TombStoneRecordFilter}
+     */
     public static TombStoneRecordFilter filter() {
         return new TombStoneRecordFilter();
     }

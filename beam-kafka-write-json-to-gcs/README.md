@@ -12,6 +12,7 @@ java -jar <jar_name> \
     --topic=<topic> \
     --autoOffsetReset=<earliest/latest> \
     --windowDuration=<5s/5m/5h> \
+    --lateDuration=<5s/5m/5h> \
     --numShards=<number_of_shards> \
     --outputDirectory=<output>
 ```

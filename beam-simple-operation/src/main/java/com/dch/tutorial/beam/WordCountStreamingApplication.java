@@ -18,6 +18,18 @@ import java.util.Arrays;
 
 import static org.apache.beam.sdk.values.TypeDescriptors.strings;
 
+/**
+ * Pipeline that stream the input then counts the number of words.
+ * <p>
+ * Please output the count of each word in the following format:
+ * <pre>
+ *   word:count
+ *   ball:5
+ *   book:3
+ * </pre>
+ *
+ * @author david.christianto
+ */
 public class WordCountStreamingApplication {
 
     public static void main(String... args) {

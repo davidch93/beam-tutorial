@@ -17,6 +17,11 @@ public class KafkaRecordTransformer extends PTransform<PCollection<String>, PCol
     private KafkaRecordTransformer() {
     }
 
+    /**
+     * A convenience way to construct {@link KafkaRecordTransformer}.
+     *
+     * @return {@link KafkaRecordTransformer}
+     */
     public static KafkaRecordTransformer transform() {
         return new KafkaRecordTransformer();
     }
