@@ -11,6 +11,7 @@ import org.apache.beam.sdk.values.PCollection;
  * Transform the kafka record to specific record. The record used format from Debezium.
  *
  * @author david.christianto
+ * @see org.apache.beam.sdk.transforms.PTransform
  */
 public class KafkaRecordTransformer extends PTransform<PCollection<String>, PCollection<String>> {
 

@@ -16,26 +16,27 @@ import javax.annotation.Nullable;
  * It means, all streams arrived at a time should be stored in a folder named as yyyy/mm/dd of that time.
  *
  * @author david.christianto
+ * @see org.apache.beam.sdk.io.FileBasedSink.FilenamePolicy
  */
-public class DatePartitionedNamePolicy extends FileBasedSink.FilenamePolicy {
+public class DatePartitionedFileNamingPolicy extends FileBasedSink.FilenamePolicy {
 
     private static final DateTimeFormatter DATE_PARTITIONED_FORMATTER = DateTimeFormat.forPattern("yyyy-MM-dd");
     private static final DateTimeFormatter HOUR_PARTITIONED_FORMATTER = DateTimeFormat.forPattern("HH");
 
     private final ResourceId outputDirectory;
 
-    private DatePartitionedNamePolicy(ResourceId outputDirectory) {
+    private DatePartitionedFileNamingPolicy(ResourceId outputDirectory) {
         this.outputDirectory = outputDirectory;
     }
 
     /**
-     * A convenience way to construct {@link DatePartitionedNamePolicy}.
+     * A convenience way to construct {@link DatePartitionedFileNamingPolicy}.
      *
      * @param outputDirectory {@link ResourceId} Folder path prefix.
-     * @return {@link DatePartitionedNamePolicy}
+     * @return {@link DatePartitionedFileNamingPolicy}
      */
-    public static DatePartitionedNamePolicy withDatePartitioned(ResourceId outputDirectory) {
-        return new DatePartitionedNamePolicy(outputDirectory);
+    public static DatePartitionedFileNamingPolicy withNaming(ResourceId outputDirectory) {
+        return new DatePartitionedFileNamingPolicy(outputDirectory);
     }
 
     @Override

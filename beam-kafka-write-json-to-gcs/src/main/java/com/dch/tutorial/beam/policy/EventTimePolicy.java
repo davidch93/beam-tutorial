@@ -16,6 +16,7 @@ import java.util.Optional;
  * If a partition is idle, the watermark advances roughly to 'current time - 2 seconds'
  *
  * @author david.christianto
+ * @see org.apache.beam.sdk.io.kafka.TimestampPolicy
  */
 public class EventTimePolicy extends TimestampPolicy<String, String> {
 

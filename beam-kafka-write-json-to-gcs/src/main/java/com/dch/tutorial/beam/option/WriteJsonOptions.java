@@ -9,6 +9,7 @@ import org.apache.beam.sdk.options.ValueProvider;
  * Interface used to manage options for write JSON pipeline.
  *
  * @author david.christianto
+ * @see org.apache.beam.sdk.options.PipelineOptions
  */
 public interface WriteJsonOptions extends PipelineOptions {
 

@@ -15,6 +15,7 @@ import org.apache.beam.sdk.transforms.SerializableFunction;
  * </pre>
  *
  * @author david.christianto
+ * @see org.apache.beam.sdk.transforms.SerializableFunction
  */
 public class TombStoneRecordFilter implements SerializableFunction<String, Boolean> {
 

@@ -1,7 +1,7 @@
 package com.dch.tutorial.beam;
 
 import com.dch.tutorial.beam.option.WriteJsonOptions;
-import com.dch.tutorial.beam.policy.DatePartitionedNamePolicy;
+import com.dch.tutorial.beam.policy.DatePartitionedFileNamingPolicy;
 import com.dch.tutorial.beam.policy.EventTimePolicy;
 import com.dch.tutorial.beam.transform.KafkaRecordTransformer;
 import com.dch.tutorial.beam.transform.TombStoneRecordFilter;
@@ -27,8 +27,6 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 public class KafkaWriteJsonToGcsApplication {
 
     public static void main(String... args) {
-        System.out.println(String.join(", ", args));
-
         WriteJsonOptions options = PipelineOptionsFactory.fromArgs(args).as(WriteJsonOptions.class);
         options.setJobName("kafka-write-json-to-gcs-job");
         ResourceId resource = FileBasedSink.convertToFileResourceIfPossible(options.getOutputDirectory().get());
@@ -57,7 +55,7 @@ public class KafkaWriteJsonToGcsApplication {
                 .apply("Transform Record", KafkaRecordTransformer.transform())
                 .apply("Write File(s) to GCS",
                         TextIO.write()
-                                .to(DatePartitionedNamePolicy.withDatePartitioned(resource))
+                                .to(DatePartitionedFileNamingPolicy.withNaming(resource))
                                 .withTempDirectory(resource.getCurrentDirectory())
                                 .withWindowedWrites()
                                 .withNumShards(options.getNumShards().get()));
