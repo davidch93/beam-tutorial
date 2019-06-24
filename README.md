@@ -21,5 +21,5 @@ Beam supports executing programs on multiple distributed processing backends thr
    <br/>Apache Beam simple operation on Pipeline tutorial.
 2. [Kafka Write JSON to GCS](https://github.com/davidch93/beam-tutorial/tree/master/beam-kafka-write-json-to-gcs#kafka-write-json-to-gcs-tutorial)
    <br/>Apache Beam streaming application from Kafka, transform the record, and store it to GCS with JSON format tutorial.
-3. [Kafka Write Parquet to GCS][https://github.com/davidch93/beam-tutorial/tree/master/beam-kafka-write-parquet-to-gcs#kafka-write-parquet-to-gcs-tutorial]
+3. [Kafka Write Parquet to GCS](https://github.com/davidch93/beam-tutorial/tree/master/beam-kafka-write-parquet-to-gcs#kafka-write-parquet-to-gcs-tutorial)
    <br/>Apache Beam streaming application from Kafka, transform the record, and store it to GCS with Parquet format tutorial.
