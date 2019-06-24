@@ -1,9 +1,9 @@
 package com.dch.tutorial.beam;
 
+import com.dch.tutorial.beam.option.BranchPipelineOptions;
 import com.dch.tutorial.beam.transform.GenerateFruit;
 import com.dch.tutorial.beam.util.LogUtil;
 import org.apache.beam.sdk.Pipeline;
-import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.Count;
 import org.apache.beam.sdk.transforms.FlatMapElements;
@@ -35,10 +35,10 @@ import static org.apache.beam.sdk.values.TypeDescriptors.strings;
 public class MutipleWordCountPipelineStreamingApplication {
 
     public static void main(String... args) {
-        PipelineOptions options = PipelineOptionsFactory.fromArgs(args).create();
+        BranchPipelineOptions options = PipelineOptionsFactory.fromArgs(args).as(BranchPipelineOptions.class);
         Pipeline pipeline = Pipeline.create(options);
 
-        String[] prefixes = "log1->,log2->,log3->".split(",");
+        String[] prefixes = options.getPrefixes().split(",");
         for (String prefix : prefixes) {
             createPipeline(pipeline, prefix);
         }
