@@ -14,6 +14,7 @@ import java.util.Random;
  * Class that responsible to generate unbounded records.
  *
  * @author david.christianto
+ * @see org.apache.beam.sdk.transforms.PTransform
  */
 public class GenerateFruit extends PTransform<PBegin, PCollection<String>> {
 
@@ -32,9 +33,24 @@ public class GenerateFruit extends PTransform<PBegin, PCollection<String>> {
                         ParDo.of(new DoFn<Long, String>() {
                             @ProcessElement
                             public void processElement(@Element Long number, OutputReceiver<String> out) {
-                                int rand = new Random().nextInt(2);
-                                String result = rand == 1 ? "apple" : "orange";
-                                out.output(result);
+                                int rand = new Random().nextInt(5);
+                                switch (rand) {
+                                    case 0:
+                                        out.output("apple");
+                                        break;
+                                    case 1:
+                                        out.output("banana");
+                                        break;
+                                    case 2:
+                                        out.output("grape");
+                                        break;
+                                    case 3:
+                                        out.output("watermelon");
+                                        break;
+                                    default:
+                                        out.output("orange");
+                                        break;
+                                }
                             }
                         }));
     }

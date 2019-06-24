@@ -20,6 +20,7 @@
         <module>beam-simple-operation</module>
         <module>beam-kafka-write-json-to-gcs</module>
         <module>beam-kafka-write-parquet-to-gcs</module>
+        <module>beam-template</module>
     </modules>
 </project>
 

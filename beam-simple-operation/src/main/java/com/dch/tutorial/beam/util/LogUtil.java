@@ -57,7 +57,7 @@ public class LogUtil {
                         message = message + "  Window:" + window.toString();
                     }
 
-                    LogUtil.LOGGER.info(message);
+                    LOGGER.info(message);
                     out.output(element);
                 }
             }));

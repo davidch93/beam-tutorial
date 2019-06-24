@@ -1,8 +1,8 @@
 package com.dch.tutorial.beam;
 
 import com.dch.tutorial.beam.option.WriteParquetOptions;
-import com.dch.tutorial.beam.transform.DatePartitionedFileNaming;
 import com.dch.tutorial.beam.policy.EventTimePolicy;
+import com.dch.tutorial.beam.transform.DatePartitionedFileNaming;
 import com.dch.tutorial.beam.transform.KafkaRecordTransformer;
 import com.dch.tutorial.beam.transform.TombStoneRecordFilter;
 import com.dch.tutorial.beam.util.TimeUtil;
