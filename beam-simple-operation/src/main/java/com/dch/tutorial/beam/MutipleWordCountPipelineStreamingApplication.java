@@ -37,10 +37,11 @@ public class MutipleWordCountPipelineStreamingApplication {
     public static void main(String... args) {
         BranchPipelineOptions options = PipelineOptionsFactory.fromArgs(args).as(BranchPipelineOptions.class);
         Pipeline pipeline = Pipeline.create(options);
+        PCollection<String> fruits = pipeline.apply(GenerateFruit.randomly());
 
         String[] prefixes = options.getPrefixes().split(",");
         for (String prefix : prefixes) {
-            createPipeline(pipeline, prefix);
+            createPipeline(fruits, prefix);
         }
 
         pipeline.run();
@@ -49,13 +50,12 @@ public class MutipleWordCountPipelineStreamingApplication {
     /**
      * Method to create WordCountStreaming pipeline with specified prefix.
      *
-     * @param pipeline {@link Pipeline}
-     * @param prefix   Prefix to log each elements.
+     * @param fruits {@link PCollection}
+     * @param prefix Prefix to log each elements.
      * @return {@link Pipeline} WordCountStreaming.
      */
-    private static PCollection<String> createPipeline(Pipeline pipeline, String prefix) {
-        return pipeline
-                .apply(GenerateFruit.randomly())
+    private static PCollection<String> createPipeline(PCollection<String> fruits, String prefix) {
+        return fruits
                 .apply("Flat Map to words",
                         FlatMapElements.into(strings()).via(sentence -> Arrays.asList(sentence.split(" "))))
                 .apply("Window",

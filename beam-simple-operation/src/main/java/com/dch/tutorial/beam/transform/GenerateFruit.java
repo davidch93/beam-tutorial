@@ -47,6 +47,9 @@ public class GenerateFruit extends PTransform<PBegin, PCollection<String>> {
                                     case 3:
                                         out.output("watermelon");
                                         break;
+                                    case 4:
+                                        out.output("melon");
+                                        break;
                                     default:
                                         out.output("orange");
                                         break;
